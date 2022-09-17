@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> Valorant Skin List</h1>
+    {% for skin in skins %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ skin.name }}</span>
+                    <p>Weapon: {{ skin.weapon }}</p>
+                    <p>Price: {{ skin.price }}</p>
+            </div>
+        </div>
+                
+    {% endfor %}
+{% endblock %}
