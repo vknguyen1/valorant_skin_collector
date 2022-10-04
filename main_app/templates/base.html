@@ -10,7 +10,10 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+            {% block title %}
+            {% endblock %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>{{ page_name }} | Skin Collector}}</title>
 </head>
 <body>
@@ -21,12 +24,35 @@
                     <a href="/" class="left brand-logo">Skin Collector</a>
                 </li>
                 <ul class="right">
+                    {% if user.is_authenticated %}
                     <li>
-                        <a href="/about">About</a>
+                        <a href="{% url 'about' %}">About</a>
                     </li>
                     <li>
-                        <a href="/skins">Valorant Skin Collection</a>
+                        <a href="{% url 'skin_create' %}">Add to Collection</a>
                     </li>
+                    <li>
+                        <a href="{% url 'index' %}">View Skin Collection</a>
+                    </li>
+                          <li>
+                        <a href="{% url 'account_create' %}">Add a Account</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'index' %} ">View My Accounts</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %} ">Logout</a>
+                        {% else %}
+                    <li>
+                        <a href="{% url 'about' %}">About</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'signup' %}">Signup</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </ul>
         </nav>
@@ -38,7 +64,7 @@
 
     <footer class="page-footer">
         <p class="right">
-            All Rights Reserved %copy; 2022 Cat Collector
+            All Rights Reserved %copy; 2022 Account Collector
         </p>
     </footer>
 </body>

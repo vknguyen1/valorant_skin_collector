@@ -5,7 +5,9 @@
     {% for skin in skins %}
         <div class="card">
             <div class="card-content">
+                <a href="/skins/{{skin.id}}">
                 <span class="card-title">{{ skin.name }}</span>
+                </a>
                     <p>Weapon: {{ skin.weapon }}</p>
                     <p>Price: {{ skin.price }}</p>
             </div>

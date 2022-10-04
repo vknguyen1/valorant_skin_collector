@@ -1,0 +1,21 @@
+
+   
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if object %}
+    <h1>Edit <span class="{{object.color.lower}}-text">{{object.color.capitalize}}</span> {{ object.name.capitalize }}</h1>
+    {% else %}
+    <h1>Add New Riot Account</h1>
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input class="btn green" type="submit" value="Submit">
+    </form>
+
+{% endblock %}

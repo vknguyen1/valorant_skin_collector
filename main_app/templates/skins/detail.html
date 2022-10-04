@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Skin Detail</h1>
+    <div class="row">
+        <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <a href="/skins/{{skin.id}}">
+                <span class="card-title">{{ skin.name }}</span>
+                </a>
+                    <p>Weapon: {{ skin.weapon }}</p>
+                    <p>Price: {{ skin.price }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'skin_update' skin.id %}">Edit</a>
+                <a href="{% url 'skin_delete' skin.id %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    
+            <div class="col s6">
+                <form action="{% url 'add_variant' skin.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ variant_form.as_p }}
+                    <input type="submit" class="btn" value="Add Variant">
+                </form>
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Variant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for variant in skin.variant_set.all %}
+                        <tr>
+                            <td>{{ variant.date }}</td>
+                            <td>{{ variant.get_variant_display }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+  <script>
+  const dateEl = document.getElementById('id_date');
+  const selectEl = document.getElementById('id_variant')
+  
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  })
+
+  M.FormSelect.init(selectEl)
+</script>
+{% endblock %}
